@@ -11,7 +11,7 @@ contract Fallback {
 
     constructor() public {
         owner = msg.sender;
-        contributions[msg.sender] = 10 * (1 ether);
+        contributions[msg.sender] = 1000 * (1 ether);
     }
 
     modifier onlyOwner() {
