@@ -2,6 +2,7 @@
 pragma solidity ^0.6.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "hardhat/console.sol";
 
 contract Fallback {
     using SafeMath for uint256;
@@ -10,7 +11,7 @@ contract Fallback {
 
     constructor() public {
         owner = msg.sender;
-        contributions[msg.sender] = 1000 * (1 ether);
+        contributions[msg.sender] = 10 * (1 ether);
     }
 
     modifier onlyOwner() {
@@ -35,6 +36,7 @@ contract Fallback {
     }
 
     receive() external payable {
+        console.log("Received Ether");
         require(msg.value > 0 && contributions[msg.sender] > 0);
         owner = msg.sender;
     }
