@@ -3,7 +3,7 @@ const { ethers } = require("hardhat");
 const { MaxUint256 } = require("@ethersproject/constants");
 const { BigNumber } = require("ethers");
 
-describe("RebaseDividendToken Token Test", function () {
+describe("test", function () {
     var CoinFlip;
     var AttackCoinFlip;
     it("init params", async function () {
