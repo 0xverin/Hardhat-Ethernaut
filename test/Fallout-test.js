@@ -3,12 +3,12 @@ const { ethers } = require("hardhat");
 const { MaxUint256 } = require("@ethersproject/constants");
 const { BigNumber } = require("ethers");
 
-describe("RebaseDividendToken Token Test", function () {
+describe("Fallout Test", function () {
     var Fallout;
     it("init params", async function () {
         [deployer, ...users] = await ethers.getSigners();
     });
-    it("fallback deploy", async function () {
+    it("Fallout deploy", async function () {
         const FallOutInstance = await ethers.getContractFactory("Fallout");
         Fallout = await FallOutInstance.deploy();
     });
@@ -16,5 +16,7 @@ describe("RebaseDividendToken Token Test", function () {
         expect(await Fallout.owner()).to.not.equal(deployer.address);
         await Fallout.Fal1out();
         expect(await Fallout.owner()).to.equal(deployer.address);
+
+        await Fallout.collectAllocations();
     });
 });
