@@ -23,10 +23,11 @@ describe("test", function () {
         const interface = new ethers.utils.Interface(abi);
 
         const callData = interface.encodeFunctionData(`pwn`, []);
-        await users[0].sendTransaction({
+        const res = await users[0].sendTransaction({
             to: Delegation.address,
             data: callData,
         });
+        await res.wait();
         console.log(await Delegation.owner());
     });
 });
