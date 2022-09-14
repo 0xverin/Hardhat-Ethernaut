@@ -22,11 +22,8 @@ describe("test", function () {
             to: AttackForce.address,
             value: parseEther("1"),
         });
-        const balance1 = await ethers.provider.getBalance(AttackForce.address);
-
         await AttackForce.attack(Force.address);
-        const balance2 = await ethers.provider.getBalance(Force.address);
-
-        expect(balance2).to.equal(parseEther("1"));
+        const balance = await ethers.provider.getBalance(Force.address);
+        expect(balance).to.equal(parseEther("1"));
     });
 });
