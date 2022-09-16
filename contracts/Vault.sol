@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
+import "hardhat/console.sol";
 
 contract Vault {
     bool public locked;
@@ -8,6 +9,7 @@ contract Vault {
     constructor(bytes32 _password) public {
         locked = true;
         password = _password;
+        console.logBytes32(password);
     }
 
     function unlock(bytes32 _password) public {

