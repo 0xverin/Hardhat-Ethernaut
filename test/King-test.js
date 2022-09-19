@@ -30,7 +30,7 @@ describe("test", function () {
                 to: King.address,
             });
         } catch (error) {
-            console.log(error);
+            console.log("error", "无法发送ETH到合约地址");
         }
     });
 });
