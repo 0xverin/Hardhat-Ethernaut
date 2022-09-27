@@ -40,9 +40,11 @@ describe("test", function () {
         await AttackReentrance.connect(users[0]).attack();
 
         const balance1 = await ethers.provider.getBalance(Reentrance.address);
+
         const balance2 = await ethers.provider.getBalance(AttackReentrance.address);
 
         expect(balance1).to.equal(0);
+
         expect(balance2).to.equal(parseEther("91"));
     });
 });
