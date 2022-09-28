@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
-import "hardhat/console.sol";
 
 interface BuildingInterface {
     function isLastFloor(uint256) external returns (bool);

@@ -17,8 +17,8 @@ describe("test", function () {
         Building = await BuildingInstance.deploy();
     });
     it("hack test", async function () {
-        console.log(await Elevator.top());
+        expect(await Elevator.top()).to.equal(false);
         await Building.exploit(Elevator.address);
-        console.log(await Elevator.top());
+        expect(await Elevator.top()).to.equal(true);
     });
 });
